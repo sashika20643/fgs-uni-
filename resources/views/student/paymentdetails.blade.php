@@ -1,0 +1,78 @@
+@extends('student.layout.layout')
+
+@section('content')
+
+<div class="container ps-5 pe-5"  style="background-color: rgb(193, 189, 182,.2)">
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+
+          <th>
+            Fee Catagory
+          </th>
+          <th>
+            Amount
+          </th>
+          <th>
+            Status
+          </th>
+
+        </tr>
+      </thead>
+      <tbody>
+@foreach ( $feeses as $fee )
+
+
+
+
+        <tr>
+               <td>
+                {{$fee->fee_type}}
+          </td>
+
+          <td>
+            {{$fee->fee}}
+          </td>
+          @php
+              $st=0;
+          @endphp
+          @foreach ($stu_fee as $stu )
+
+    @if ($fee->id==$stu->feeid)
+    @php
+    $st=1;
+@endphp
+
+
+
+
+          @endif
+          @endforeach
+          @if ($st)
+
+          <td >
+            <button class="btn btn-outline-warning">
+                {{$stu->status}}
+            </button>
+
+          </td>
+          @else
+          <td>
+            <button class="btn btn-outline-danger">
+                yet to pay
+            </button>
+
+                </td>
+          @endif
+        </tr>
+
+
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
+@endsection
